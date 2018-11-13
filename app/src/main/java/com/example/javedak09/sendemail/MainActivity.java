@@ -18,6 +18,7 @@ public class MainActivity extends Activity {
         Button btnSendEmail = (Button) findViewById(R.id.btnSendEmail);
         final EditText txtEmail = (EditText) findViewById(R.id.txtEmail);
 
+
         btnSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
