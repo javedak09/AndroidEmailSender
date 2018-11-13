@@ -1,11 +1,16 @@
 package com.example.javedak09.sendemail;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.io.File;
 
 
 public class MainActivity extends Activity {
@@ -17,7 +22,7 @@ public class MainActivity extends Activity {
 
         Button btnSendEmail = (Button) findViewById(R.id.btnSendEmail);
         final EditText txtEmail = (EditText) findViewById(R.id.txtEmail);
-
+        Button btnBrowse = (Button) findViewById(R.id.btnBrowse);
 
         btnSendEmail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,5 +47,28 @@ public class MainActivity extends Activity {
 
             }
         });
+
+        btnBrowse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String fpath = Environment.getExternalStorageDirectory().getPath() + "/mypdf";
+                File root = new File(fpath);
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                Uri uri = Uri.fromFile(root);
+                intent.setDataAndType(uri, "file/*");
+                startActivity(intent);
+
+                try {
+                    startActivityForResult(Intent.createChooser(intent, "Select a File to Upload"), 0);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+
+            }
+        });
+
     }
 }

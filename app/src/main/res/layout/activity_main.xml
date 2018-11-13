@@ -23,8 +23,14 @@
             android:id="@+id/btnSendEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password here"
             android:text="Send Email" />
+
+        <Button
+            android:id="@+id/btnBrowse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Browse File" />
+
 
     </LinearLayout>
 </ScrollView>

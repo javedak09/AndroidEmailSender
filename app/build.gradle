@@ -27,4 +27,5 @@ dependencies {
     implementation files('libs/activation.jar')
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')
+    implementation 'com.github.ghost1372:Mzip-Android:0.4.0'
 }
