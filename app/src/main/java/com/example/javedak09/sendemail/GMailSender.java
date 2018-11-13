@@ -6,12 +6,18 @@ import java.security.Security;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class GMailSender extends javax.mail.Authenticator {
     private static final String TAG = "GMailSender";
@@ -79,6 +85,18 @@ public class GMailSender extends javax.mail.Authenticator {
         message.setSender(new InternetAddress(sender));
         message.setSubject(subject);
         message.setDataHandler(handler);
+
+        Multipart _multipart = new MimeMultipart();
+
+
+        BodyPart messageBodyPart = new MimeBodyPart();
+        DataSource source = new FileDataSource("");
+
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        messageBodyPart.setFileName("");
+
+        _multipart.addBodyPart(messageBodyPart);
+        message.setContent(_multipart);
 
 
         if (recipients.indexOf(',') > 0)
